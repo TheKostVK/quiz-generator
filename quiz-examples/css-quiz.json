@@ -1,0 +1,99 @@
+{
+  "title": "CSS: Flexbox и Grid",
+  "description": "Проверьте понимание современных методов верстки в CSS",
+  "questions": [
+    {
+      "id": 1,
+      "text": "Какое свойство выравнивает flex-элементы по главной оси?",
+      "type": "single",
+      "options": [
+        {
+          "id": 1,
+          "text": "align-items",
+          "correct": false,
+          "message": "align-items выравнивает по поперечной оси"
+        },
+        {
+          "id": 2,
+          "text": "justify-content",
+          "correct": true,
+          "message": "Правильно! justify-content управляет выравниванием по главной оси"
+        },
+        {
+          "id": 3,
+          "text": "flex-direction",
+          "correct": false,
+          "message": "flex-direction задает направление оси, но не выравнивание"
+        },
+        {
+          "id": 4,
+          "text": "flex-wrap",
+          "correct": false,
+          "message": "flex-wrap управляет переносом элементов"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Какие из этих значений можно использовать для display?",
+      "type": "multiple",
+      "options": [
+        {
+          "id": 1,
+          "text": "block",
+          "correct": true,
+          "message": "Да, block - базовое значение для блочных элементов"
+        },
+        {
+          "id": 2,
+          "text": "flex",
+          "correct": true,
+          "message": "Верно! flex включает flexbox-верстку"
+        },
+        {
+          "id": 3,
+          "text": "grid",
+          "correct": true,
+          "message": "Правильно! grid включает CSS Grid верстку"
+        },
+        {
+          "id": 4,
+          "text": "inline-flex",
+          "correct": true,
+          "message": "Да! inline-flex создает строчный flex-контейнер"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Что делает свойство position: sticky?",
+      "type": "single",
+      "options": [
+        {
+          "id": 1,
+          "text": "Фиксирует элемент относительно окна браузера",
+          "correct": false,
+          "message": "Это поведение position: fixed"
+        },
+        {
+          "id": 2,
+          "text": "Позиционирует элемент относительно его нормального положения",
+          "correct": false,
+          "message": "Это поведение position: relative"
+        },
+        {
+          "id": 3,
+          "text": "Переключается между relative и fixed в зависимости от прокрутки",
+          "correct": true,
+          "message": "Верно! Элемент ведет себя как relative, пока не достигнет заданного offset, затем становится fixed"
+        },
+        {
+          "id": 4,
+          "text": "Абсолютно позиционирует элемент",
+          "correct": false,
+          "message": "Это поведение position: absolute"
+        }
+      ]
+    }
+  ]
+}

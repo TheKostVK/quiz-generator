@@ -1,0 +1,99 @@
+{
+  "title": "Основы HTML",
+  "description": "Проверьте свои знания по HTML: теги, атрибуты и семантика",
+  "questions": [
+    {
+      "id": 1,
+      "text": "Какой тег используется для создания ссылки?",
+      "type": "single",
+      "options": [
+        {
+          "id": 1,
+          "text": "<link>",
+          "correct": false,
+          "message": "Тег <link> используется для подключения внешних ресурсов, а не для создания ссылок"
+        },
+        {
+          "id": 2,
+          "text": "<a>",
+          "correct": true,
+          "message": "Верно! Тег <a> создает гиперссылки"
+        },
+        {
+          "id": 3,
+          "text": "<href>",
+          "correct": false,
+          "message": "href - это атрибут, а не тег"
+        },
+        {
+          "id": 4,
+          "text": "<url>",
+          "correct": false,
+          "message": "Такого тега не существует в HTML"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Какие из этих тегов являются семантическими?",
+      "type": "multiple",
+      "options": [
+        {
+          "id": 1,
+          "text": "<div>",
+          "correct": false,
+          "message": "<div> - это блочный контейнер без семантического значения"
+        },
+        {
+          "id": 2,
+          "text": "<header>",
+          "correct": true,
+          "message": "Правильно! <header> определяет шапку страницы или раздела"
+        },
+        {
+          "id": 3,
+          "text": "<span>",
+          "correct": false,
+          "message": "<span> - это строчный контейнер без семантики"
+        },
+        {
+          "id": 4,
+          "text": "<article>",
+          "correct": true,
+          "message": "Да! <article> определяет независимый самодостаточный контент"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Какой атрибут обязателен для тега <img>?",
+      "type": "single",
+      "options": [
+        {
+          "id": 1,
+          "text": "src",
+          "correct": true,
+          "message": "Верно! Атрибут src указывает путь к изображению"
+        },
+        {
+          "id": 2,
+          "text": "alt",
+          "correct": false,
+          "message": "alt очень важен для доступности, но технически не обязателен"
+        },
+        {
+          "id": 3,
+          "text": "width",
+          "correct": false,
+          "message": "width задает ширину, но не является обязательным"
+        },
+        {
+          "id": 4,
+          "text": "title",
+          "correct": false,
+          "message": "title добавляет всплывающую подсказку, но не обязателен"
+        }
+      ]
+    }
+  ]
+}

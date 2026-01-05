@@ -1,0 +1,18 @@
+{
+  "name": "quizzer",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "7.1.12"
+  },
+  "dependencies": {
+    "idb": "8.0.3",
+    "nanoid": "5.1.6",
+    "zod": "4.1.12"
+  }
+}

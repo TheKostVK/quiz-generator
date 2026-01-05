@@ -1,0 +1,99 @@
+{
+  "title": "Инструменты веб-разработчика",
+  "description": "Git, npm, сборщики и другие инструменты современного разработчика",
+  "questions": [
+    {
+      "id": 1,
+      "text": "Для чего используется команда git clone?",
+      "type": "single",
+      "options": [
+        {
+          "id": 1,
+          "text": "Для копирования удаленного репозитория на локальную машину",
+          "correct": true,
+          "message": "Верно! git clone создает локальную копию удаленного репозитория"
+        },
+        {
+          "id": 2,
+          "text": "Для создания новой ветки",
+          "correct": false,
+          "message": "Для создания ветки используется git branch или git checkout -b"
+        },
+        {
+          "id": 3,
+          "text": "Для копирования файлов между ветками",
+          "correct": false,
+          "message": "Для этого используются git cherry-pick или git merge"
+        },
+        {
+          "id": 4,
+          "text": "Для создания копии текущей ветки",
+          "correct": false,
+          "message": "Это не основное назначение git clone"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Какие из этих файлов используются в современных проектах?",
+      "type": "multiple",
+      "options": [
+        {
+          "id": 1,
+          "text": "package.json",
+          "correct": true,
+          "message": "Да! package.json содержит информацию о проекте и зависимостях"
+        },
+        {
+          "id": 2,
+          "text": "vite.config.js",
+          "correct": true,
+          "message": "Верно! Это конфигурационный файл для Vite"
+        },
+        {
+          "id": 3,
+          "text": "README.md",
+          "correct": true,
+          "message": "Правильно! README содержит документацию проекта"
+        },
+        {
+          "id": 4,
+          "text": "index.php",
+          "correct": false,
+          "message": "Это файл для PHP-проектов, а не для современных фронтенд-проектов"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Что делает команда npm install?",
+      "type": "single",
+      "options": [
+        {
+          "id": 1,
+          "text": "Устанавливает зависимости, указанные в package.json",
+          "correct": true,
+          "message": "Правильно! npm install устанавливает все зависимости проекта"
+        },
+        {
+          "id": 2,
+          "text": "Создает новый npm-пакет",
+          "correct": false,
+          "message": "Для создания пакета используется npm init"
+        },
+        {
+          "id": 3,
+          "text": "Публикует пакет в npm registry",
+          "correct": false,
+          "message": "Для публикации используется npm publish"
+        },
+        {
+          "id": 4,
+          "text": "Обновляет все зависимости до последних версий",
+          "correct": false,
+          "message": "Для обновления используется npm update"
+        }
+      ]
+    }
+  ]
+}

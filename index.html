@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Генератор квизов</title>
+    <link
+      rel="stylesheet"
+      href="./css/pages/index.css" />
+    <link
+            rel="stylesheet"
+            href="./css/components/header.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+            rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <img src="assets/logo.svg" alt="логотип" class="header__logo" />
+
+        <nav class="header__nav">
+          <a href="/index.html" class="header__link">Добавить квиз</a>
+          <a href="/quizzes.html" class="header__link">Сохранённые квизы</a>
+        </nav>
+
+        <button class="header__burger" aria-label="Открыть меню">
+          <img src="assets/threeLines.svg" alt="раскрытие меню" class="header__burger__img"/>
+        </button>
+      </header>
+      <main class="main"></main>
+    </div>
+    <script
+      type="module"
+      src="./js/pages/main.js"></script>
+  </body>
+</html>
