@@ -47,12 +47,16 @@ export class Quiz {
             const include = userOptions.includes(quizOption.id);
 
             if (quizOption.correct && !include || !quizOption.correct && include) {
-                result.push(quizOption);
+                result.push({...quizOption, selected: include});
                 correct = false;
+            } else if (quizOption.correct) {
+                result.push({...quizOption, selected: include});
             }
         });
 
         this.userAnswers.set(questionId, {userOptions, correct});
+
+        return result;
     }
 
     /**

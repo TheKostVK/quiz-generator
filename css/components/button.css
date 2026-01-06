@@ -1,0 +1,53 @@
+.btn {
+    border: solid 1px;
+    border-radius: var(--radius-xs);
+
+    padding: 8px 16px;
+
+    cursor: pointer;
+}
+
+.btn:hover {
+    transition: background var(--animation-normal), opacity var(--animation-normal);
+}
+
+.btn:focus {
+    outline: none;
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.btn--primary {
+    color: var(--color-surface);
+    background: var(--color-primary);
+}
+
+.btn--primary:hover {
+    opacity: 85%;
+}
+
+.btn--primary_disabled {
+    color: var(--color-surface);
+    background: var(--color-border);
+}
+
+.btn--secondary {
+    color: var(--color-primary);
+    border: solid 1px var(--color-primary);
+}
+
+.btn--secondary:hover {
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+.btn--link {
+    color: var(--color-primary);
+    border: none;
+}
+
+.btn--link:hover {
+    color: color-mix(in srgb, var(--color-primary) 80%, transparent);
+}

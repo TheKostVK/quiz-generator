@@ -1,0 +1,98 @@
+@import "variables.css";
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: var(--font-family-base), system-ui;
+    font-size: var(--font-body-size);
+    font-weight: var(--font-body-weight);
+    line-height: var(--font-body-line);
+
+    color: var(--color-text-main);
+    background: var(--color-bg);
+
+    padding: 0 43px;
+}
+
+h1 {
+    margin: 0;
+
+    font-size: var(--font-h1-size);
+    font-weight: var(--font-h1-weight);
+    line-height: var(--font-h1-line);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.caption {
+    font-size: var(--font-caption-size);
+    line-height: var(--font-caption-line);
+    color: var(--color-text-secondary);
+}
+
+.code {
+    font-family: var(--font-family-mono), monospace;
+    font-size: var(--font-mono-size);
+    line-height: var(--font-mono-line);
+}
+
+.page {
+    min-height: 100vh;
+    max-width: 1140px;
+    margin: auto;
+
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    gap: var(--grid-gutter);
+
+    grid-template-areas: ". . main main main main main main main main . .";
+
+    box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --grid-columns: var(--grid-columns-tablet);
+        --grid-gutter: var(--grid-gutter-tablet);
+        --grid-margin: var(--grid-margin-tablet);
+    }
+
+    .page {
+        max-width: 704px;
+    }
+
+    .main {
+        grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+        grid-template-areas: "main main main main main main main main";
+        gap: var(--grid-gutter);
+    }
+}
+
+@media (max-width: 640px) {
+    :root {
+        --grid-columns: var(--grid-columns-mobile);
+        --grid-gutter: var(--grid-gutter-mobile);
+        --grid-margin: var(--grid-margin-mobile);
+    }
+
+    .page {
+        max-width: 328px;
+    }
+
+    .main {
+        grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+        grid-template-areas: "main main main main";
+        gap: var(--grid-gutter);
+    }
+}

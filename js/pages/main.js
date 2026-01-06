@@ -1,14 +1,14 @@
 import { init } from "../utils/init";
-import {Header} from "../components/header";
+import {Header} from "../components/layout/header";
 import {Quiz} from "../components/quiz";
 
 import dataQuiz from "../../quiz-examples/css-quiz.json";
 
 init();
 
-const menu = new Header();
+const header = new Header();
+//const quizGenerator = new QuizGenerator();
 
-const quiz = new Quiz(dataQuiz);
-
-console.log(quiz.getNextQuestion());
-console.log(quiz.setAnswerQuestion(1, 1));
+header.setMenuItems([
+    { text: 'Посмотреть сохранённые квизы', href: '/quizzes.html', variant: 'secondary' },
+]);
