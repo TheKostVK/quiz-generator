@@ -1,28 +1,135 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0" />
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"/>
     <title>Ваши квизы</title>
-    <link
-      rel="stylesheet"
-      href="./css/pages/quizzes.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
-            rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="page">
-      <header class="header"></header>
-      <main class="main"></main>
-    </div>
-    <script
-      type="module"
-      src="./js/pages/quizzes.js"></script>
-  </body>
+    <link rel="stylesheet" href="./css/base/base.css"/>
+    <link rel="stylesheet" href="./css/pages/quizzes.css"/>
+    <link rel="stylesheet" href="./css/components/index.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+          rel="stylesheet"/>
+</head>
+<body>
+<div class="page">
+    <header class="header">
+        <img src="assets/logo.svg" alt="логотип" class="header__logo"/>
+
+        <nav class="header__nav">
+
+        </nav>
+
+        <button class="header__burger" aria-label="Открыть меню">
+            <img src="assets/threeLines.svg" alt="раскрытие меню" class="header__burger__img"/>
+        </button>
+    </header>
+    <main class="main">
+        <section class="quizzes">
+            <header class="quizzes__header">
+                <h1 class="quizzes__title">Ваши квизы</h1>
+            </header>
+            <div class="quizzes__content">
+                <article class="quiz-card">
+                    <h3 class="quiz-card__title">Основы JavaScript</h3>
+
+                    <p class="quiz-card__description">
+                        Проверьте, насколько хорошо вы разбираетесь в базовых концепциях JS:
+                        типы данных, функции, область видимости и замыкания.
+                    </p>
+
+                    <div class="quiz-card__footer">
+                        <span class="quiz-card__questions-count">10 вопросов</span>
+
+                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
+                            Пройти
+                        </a>
+                    </div>
+                </article>
+                <article class="quiz-card">
+                    <h3 class="quiz-card__title">История искусственного интеллекта</h3>
+
+                    <p class="quiz-card__description">
+                        Тест о развитии ИИ — от первых нейронных сетей до современных языковых моделей.
+                    </p>
+
+                    <div class="quiz-card__footer">
+                        <span class="quiz-card__questions-count">8 вопросов</span>
+
+                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
+                            Пройти
+                        </a>
+                    </div>
+                </article>
+                <article class="quiz-card">
+                    <h3 class="quiz-card__title">HTML и структура веб-страниц</h3>
+
+                    <p class="quiz-card__description">
+                        Проверьте свои знания по тегам, атрибутам и семантике HTML5.
+                    </p>
+
+                    <div class="quiz-card__footer">
+                        <span class="quiz-card__questions-count">12 вопросов</span>
+
+                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
+                            Пройти
+                        </a>
+                    </div>
+                </article>
+                <article class="quiz-card">
+                    <h3 class="quiz-card__title">Психология восприятия цвета</h3>
+
+                    <p class="quiz-card__description">
+                        Как цвета влияют на эмоции и принятие решений? Пройдите тест и узнайте.
+                    </p>
+
+                    <div class="quiz-card__footer">
+                        <span class="quiz-card__questions-count">9 вопросов</span>
+
+                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
+                            Пройти
+                        </a>
+                    </div>
+                </article>
+                <article class="quiz-card">
+                    <h3 class="quiz-card__title">Философия сознания</h3>
+
+                    <p class="quiz-card__description">
+                        От Декарта до современного когнитивизма — что мы знаем о природе сознания?
+                    </p>
+
+                    <div class="quiz-card__footer">
+                        <span class="quiz-card__questions-count">7 вопросов</span>
+
+                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
+                            Пройти
+                        </a>
+                    </div>
+                </article>
+                <article class="quiz-card">
+                    <h3 class="quiz-card__title">UX-дизайн и пользовательские сценарии</h3>
+
+                    <p class="quiz-card__description">
+                        Квиз о паттернах UX, исследовании пользователей и принципах визуальной иерархии.
+                    </p>
+
+                    <div class="quiz-card__footer">
+                        <span class="quiz-card__questions-count">10 вопросов</span>
+
+                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
+                            Пройти
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+</div>
+<script
+        type="module"
+        src="./js/pages/quizzes.js"></script>
+</body>
 </html>

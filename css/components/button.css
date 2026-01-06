@@ -1,10 +1,13 @@
 .btn {
+    height: 40px;
     border: solid 1px;
     border-radius: var(--radius-xs);
 
     padding: 8px 16px;
 
     cursor: pointer;
+
+    box-sizing: border-box;
 }
 
 .btn:hover {

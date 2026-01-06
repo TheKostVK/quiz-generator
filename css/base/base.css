@@ -25,6 +25,26 @@ h1 {
     line-height: var(--font-h1-line);
 }
 
+h2 {
+    margin: 0;
+
+    font-size: var(--font-h2-size);
+    font-weight: var(--font-h2-weight);
+    line-height: var(--font-h2-line);
+}
+
+h3 {
+    margin: 0;
+
+    font-size: var(--font-h3-size);
+    font-weight: var(--font-h3-weight);
+    line-height: var(--font-h3-line);
+}
+
+p {
+    margin: 0;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -52,6 +72,8 @@ a {
 }
 
 .main {
+    padding: var(--grid-margin) 0;
+
     display: grid;
     grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
     gap: var(--grid-gutter);
@@ -64,6 +86,7 @@ a {
 @media (max-width: 1200px) {
     :root {
         --grid-columns: var(--grid-columns-tablet);
+        --grid-content-columns: var(--grid-content-columns-tablet);
         --grid-gutter: var(--grid-gutter-tablet);
         --grid-margin: var(--grid-margin-tablet);
     }
@@ -82,6 +105,7 @@ a {
 @media (max-width: 640px) {
     :root {
         --grid-columns: var(--grid-columns-mobile);
+        --grid-content-columns: var(--grid-content-columns-mobile);
         --grid-gutter: var(--grid-gutter-mobile);
         --grid-margin: var(--grid-margin-mobile);
     }

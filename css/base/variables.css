@@ -79,6 +79,10 @@
     --grid-columns-tablet: 8;
     --grid-columns-mobile: 4;
 
+    --grid-content-columns-desktop: 3;
+    --grid-content-columns-tablet: 2;
+    --grid-content-columns-mobile: 1;
+
     --grid-gutter-desktop: 24px;
     --grid-gutter-tablet: 20px;
     --grid-gutter-mobile: 16px;
@@ -88,6 +92,7 @@
     --grid-margin-mobile: 16px;
 
     --grid-columns: var(--grid-columns-desktop);
+    --grid-content-columns: var(--grid-content-columns-desktop);
     --grid-gutter: var(--grid-gutter-desktop);
     --grid-margin: var(--grid-margin-desktop);
 }

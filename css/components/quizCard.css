@@ -1,0 +1,34 @@
+.quiz-card {
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-e1);
+
+    padding: var(--space-16);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-8);
+}
+
+.quiz-card__title {
+
+}
+
+.quiz-card__description {
+    color: var(--color-text-secondary);
+}
+
+.quiz-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quiz-card__questions-count {
+    color: var(--color-text-secondary);
+}
+
+.quiz-card__action {
+
+}
