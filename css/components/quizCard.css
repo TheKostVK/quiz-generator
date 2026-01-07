@@ -11,6 +11,10 @@
     gap: var(--space-8);
 
     transition: border-color var(--animation-normal), box-shadow var(--animation-normal), background-color var(--animation-normal);
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
 
 .quiz-card:hover {

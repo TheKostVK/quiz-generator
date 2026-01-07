@@ -47,7 +47,9 @@
                         aria-valuemax="7"
                         aria-valuenow="1"
                         aria-label="Прогресс прохождения"
-                ></div>
+                >
+                    <div class="quiz__progress-fill"></div>
+                </div>
             </div>
 
             <section class="quiz__question" aria-labelledby="question-title">
@@ -61,25 +63,7 @@
                 <form class="quiz__form">
                     <ul class="quiz__options" role="list">
                         <li class="quiz__option">
-                            <label class="choice choice--radio">
-                                <input class="choice__input" type="checkbox" name="answer" value="1" />
-                                <span class="choice__box" aria-hidden="true"></span>
-                                <span class="choice__label">Вопрос квиза</span>
-                            </label>
-                            <span class="choice__hint caption">текст-пояснение</span>
-                        </li>
-
-                        <li class="quiz__option">
-                            <label class="choice choice--success choice--radio">
-                                <input class="choice__input" type="checkbox" name="answer" value="1" />
-                                <span class="choice__box" aria-hidden="true"></span>
-                                <span class="choice__label">Вопрос квиза</span>
-                            </label>
-                            <span class="choice__hint caption">текст-пояснение</span>
-                        </li>
-
-                        <li class="quiz__option">
-                            <label class="choice choice--error choice--radio">
+                            <label class="choice ">
                                 <input class="choice__input" type="checkbox" name="answer" value="1" />
                                 <span class="choice__box" aria-hidden="true"></span>
                                 <span class="choice__label">Вопрос квиза</span>
@@ -87,8 +71,24 @@
                         </li>
 
                         <li class="quiz__option">
-                            <label class="choice choice--radio">
-                                <input class="choice__input" disabled type="checkbox" name="answer" value="1" />
+                            <label class="choice ">
+                                <input class="choice__input" type="checkbox" name="answer" value="1" />
+                                <span class="choice__box" aria-hidden="true"></span>
+                                <span class="choice__label">Вопрос квиза</span>
+                            </label>
+                        </li>
+
+                        <li class="quiz__option">
+                            <label class="choice ">
+                                <input class="choice__input" type="checkbox" name="answer" value="1" />
+                                <span class="choice__box" aria-hidden="true"></span>
+                                <span class="choice__label">Вопрос квиза</span>
+                            </label>
+                        </li>
+
+                        <li class="quiz__option">
+                            <label class="choice ">
+                                <input class="choice__input" type="checkbox" name="answer" value="1" />
                                 <span class="choice__box" aria-hidden="true"></span>
                                 <span class="choice__label">Вопрос квиза</span>
                             </label>

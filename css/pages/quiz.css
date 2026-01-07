@@ -27,7 +27,9 @@
 }
 
 .quiz__header {
-
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
 }
 
 .quiz__title {
@@ -39,7 +41,9 @@
 }
 
 .quiz__progress {
-
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
 }
 
 .quiz__progress-text {
@@ -55,7 +59,20 @@
 }
 
 .quiz__progress-bar {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-border);
+    overflow: hidden;
+}
 
+.quiz__progress-fill {
+    height: 100%;
+    width: 0;
+
+    background: var(--color-primary);
+    border-radius: inherit;
+
+    transition: width var(--animation-normal);
 }
 
 .quiz__question {
@@ -66,7 +83,9 @@
 }
 
 .quiz__question-header {
-
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
 }
 
 .quiz__question-title {
