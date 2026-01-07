@@ -1,28 +1,113 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0" />
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"/>
     <title>Прохождение теста</title>
-    <link
-      rel="stylesheet"
-      href="./css/pages/quiz.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
-            rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="page">
-      <header class="header"></header>
-      <main class="main"></main>
-    </div>
-    <script
-      type="module"
-      src="./js/pages/quiz.js"></script>
-  </body>
+    <link rel="stylesheet" href="./css/base/base.css"/>
+    <link rel="stylesheet" href="./css/pages/quiz.css"/>
+    <link rel="stylesheet" href="./css/components/index.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+          rel="stylesheet"/>
+</head>
+<body>
+<div class="page">
+    <header class="header">
+        <a class="header__main-link" href="/">
+            <img src="assets/logo.svg" alt="логотип" class="header__logo"/>
+        </a>
+
+        <nav class="header__nav">
+
+        </nav>
+
+        <button class="header__burger" aria-label="Открыть меню">
+            <img src="assets/threeLines.svg" alt="раскрытие меню" class="header__burger__img"/>
+        </button>
+    </header>
+    <main class="main">
+        <section class="quiz">
+            <header class="quiz__header">
+                <h1 class="quiz__title">Квиз: UX-дизайн и пользовательские сценарии</h1>
+                <p class="quiz__subtitle">
+                    Квиз о паттернах UX, исследовании пользователей и принципах визуальной иерархии.
+                </p>
+            </header>
+
+            <div class="quiz__progress">
+                <p class="quiz__progress-text">Вопрос <span class="quiz__progress-current">1</span> из <span class="quiz__progress-total">7</span></p>
+                <div
+                        class="quiz__progress-bar"
+                        role="progressbar"
+                        aria-valuemin="1"
+                        aria-valuemax="7"
+                        aria-valuenow="1"
+                        aria-label="Прогресс прохождения"
+                ></div>
+            </div>
+
+            <section class="quiz__question" aria-labelledby="question-title">
+                <div class="quiz__question-header">
+                    <h2 class="quiz__question-title" id="question-title">
+                        Что из перечисленного является примером user flow?
+                    </h2>
+                    <p class="quiz__question-subtitle caption">Выберите один вариант ответа</p>
+                </div>
+
+                <form class="quiz__form">
+                    <ul class="quiz__options" role="list">
+                        <li class="quiz__option">
+                            <label class="choice choice--radio">
+                                <input class="choice__input" type="checkbox" name="answer" value="1" />
+                                <span class="choice__box" aria-hidden="true"></span>
+                                <span class="choice__label">Вопрос квиза</span>
+                            </label>
+                            <span class="choice__hint caption">текст-пояснение</span>
+                        </li>
+
+                        <li class="quiz__option">
+                            <label class="choice choice--success choice--radio">
+                                <input class="choice__input" type="checkbox" name="answer" value="1" />
+                                <span class="choice__box" aria-hidden="true"></span>
+                                <span class="choice__label">Вопрос квиза</span>
+                            </label>
+                            <span class="choice__hint caption">текст-пояснение</span>
+                        </li>
+
+                        <li class="quiz__option">
+                            <label class="choice choice--error choice--radio">
+                                <input class="choice__input" type="checkbox" name="answer" value="1" />
+                                <span class="choice__box" aria-hidden="true"></span>
+                                <span class="choice__label">Вопрос квиза</span>
+                            </label>
+                        </li>
+
+                        <li class="quiz__option">
+                            <label class="choice choice--radio">
+                                <input class="choice__input" disabled type="checkbox" name="answer" value="1" />
+                                <span class="choice__box" aria-hidden="true"></span>
+                                <span class="choice__label">Вопрос квиза</span>
+                            </label>
+                        </li>
+                    </ul>
+
+                    <button class="btn btn--primary quiz__submit" type="submit">
+                        Ответить
+                    </button>
+                </form>
+            </section>
+        </section>
+    </main>
+    <footer class="footer">
+        Учебный проект 2025
+    </footer>
+</div>
+<script
+        type="module"
+        src="./js/pages/quiz.js"></script>
+</body>
 </html>

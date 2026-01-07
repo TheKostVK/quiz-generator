@@ -1,0 +1,155 @@
+.choice {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    align-items: center;
+    gap: var(--space-8);
+
+    padding: var(--space-12) var(--space-16);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+
+    cursor: pointer;
+
+    transition: background var(--animation-normal), opacity var(--animation-normal);
+}
+
+.choice--error {
+    border-color: var(--color-error);
+}
+
+.choice--success {
+    border-color: var(--color-success);
+}
+
+.choice--error .choice__box {
+    border-color: var(--color-error);
+}
+
+.choice--success .choice__box {
+    border-color: var(--color-success);
+}
+
+.choice--error .choice__label {
+    color: var(--color-error);
+}
+
+.choice--success .choice__label {
+    color: var(--color-success);
+}
+
+.choice:hover {
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+.choice__input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.choice__box {
+    position: relative;
+
+    height: 24px;
+    width: 24px;
+
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-xs);
+}
+
+.choice__box::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+
+    border-radius: inherit;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10px 10px;
+
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity var(--animation-normal), transform var(--animation-normal);
+}
+
+.choice__input:checked + .choice__box::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.choice:not(.choice--radio) .choice__input:checked + .choice__box {
+    background: var(--color-primary);
+}
+
+.choice:not(.choice--radio) .choice__input:checked + .choice__box::after {
+    background-image: url("../../assets/check.svg");
+}
+
+.choice--success:not(.choice--radio) .choice__input:checked + .choice__box {
+    background: var(--color-success);
+}
+
+.choice--error:not(.choice--radio) .choice__input:checked + .choice__box {
+    background: var(--color-error);
+}
+
+.choice--success:not(.choice--radio) .choice__input:checked + .choice__box::after {
+    background-image: url("../../assets/check.svg");
+}
+
+.choice--error:not(.choice--radio) .choice__input:checked + .choice__box::after {
+    background-image: url("../../assets/error.svg");
+}
+
+.choice--radio .choice__box {
+    border-radius: 999px;
+}
+
+.choice--radio:not(.choice--success):not(.choice--error)
+.choice__input:checked + .choice__box {
+    background: transparent;
+}
+
+.choice--radio:not(.choice--success):not(.choice--error)
+.choice__input:checked + .choice__box::after {
+    background: var(--color-primary);
+    background-image: none;
+}
+
+.choice--radio:not(.choice--success):not(.choice--error) .choice__input:checked + .choice__box::after {
+    background-image: none;
+}
+
+.choice--radio.choice--success .choice__input:checked + .choice__box,
+.choice--radio.choice--error .choice__input:checked + .choice__box {
+    background: transparent;
+}
+
+.choice--radio.choice--success .choice__input:checked + .choice__box::after {
+    background-image: url("../../assets/check-green.svg");
+}
+
+.choice--radio.choice--error .choice__input:checked + .choice__box::after {
+    background-image: url("../../assets/error-red.svg");
+}
+
+.choice:not(.choice--success):not(.choice--error):has(.choice__input:checked) {
+    border-color: var(--color-primary);
+}
+
+.choice__input:disabled ~ * {
+    cursor: not-allowed;
+    color: var(--color-border);
+}
+
+.choice__input:disabled + .choice__box {
+    border-color: var(--color-border);
+    background: var(--color-border);
+}
+
+.choice__hint {
+    color: var(--color-text-secondary);
+    padding: 0 var(--space-16);
+}

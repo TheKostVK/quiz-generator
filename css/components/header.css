@@ -20,6 +20,12 @@
     gap: var(--space-8);
 }
 
+.header__main-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .header__link {
     text-decoration: none;
     color: var(--color-primary);

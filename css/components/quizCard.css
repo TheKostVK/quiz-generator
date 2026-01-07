@@ -9,6 +9,18 @@
     flex-direction: column;
     justify-content: space-between;
     gap: var(--space-8);
+
+    transition: border-color var(--animation-normal), box-shadow var(--animation-normal), background-color var(--animation-normal);
+}
+
+.quiz-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-e3);
+    background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+}
+
+.quiz-card:hover .quiz-card__questions-count {
+    color: var(--color-primary);
 }
 
 .quiz-card__title {
@@ -27,6 +39,8 @@
 
 .quiz-card__questions-count {
     color: var(--color-text-secondary);
+
+    transition: color var(--animation-normal);
 }
 
 .quiz-card__action {
