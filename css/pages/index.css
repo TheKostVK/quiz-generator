@@ -71,3 +71,9 @@
 .quiz-generator__submit {
     align-self: start;
 }
+
+@media (max-width: 640px) {
+    .quiz-generator__submit {
+        align-self: stretch;
+    }
+}

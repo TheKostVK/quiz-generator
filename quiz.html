@@ -22,11 +22,11 @@
         </a>
 
         <nav class="header__nav">
-
         </nav>
 
         <button class="header__burger" aria-label="Открыть меню">
-            <img src="assets/threeLines.svg" alt="раскрытие меню" class="header__burger__img"/>
+            <img src="assets/threeLines.svg" alt="" class="header__burger-icon header__burger-icon--open" />
+            <img src="assets/cross.svg" alt="" class="header__burger-icon header__burger-icon--close" />
         </button>
     </header>
     <main class="main">
@@ -39,7 +39,8 @@
             </header>
 
             <div class="quiz__progress">
-                <p class="quiz__progress-text">Вопрос <span class="quiz__progress-current">1</span> из <span class="quiz__progress-total">7</span></p>
+                <p class="quiz__progress-text">Вопрос <span class="quiz__progress-current">1</span> из <span
+                        class="quiz__progress-total">7</span></p>
                 <div
                         class="quiz__progress-bar"
                         role="progressbar"
@@ -64,7 +65,7 @@
                     <ul class="quiz__options" role="list">
                         <li class="quiz__option">
                             <label class="choice ">
-                                <input class="choice__input" type="checkbox" name="answer" value="1" />
+                                <input class="choice__input" type="checkbox" name="answer" value="1"/>
                                 <span class="choice__box" aria-hidden="true"></span>
                                 <span class="choice__label">Вопрос квиза</span>
                             </label>
@@ -72,7 +73,7 @@
 
                         <li class="quiz__option">
                             <label class="choice ">
-                                <input class="choice__input" type="checkbox" name="answer" value="1" />
+                                <input class="choice__input" type="checkbox" name="answer" value="1"/>
                                 <span class="choice__box" aria-hidden="true"></span>
                                 <span class="choice__label">Вопрос квиза</span>
                             </label>
@@ -80,7 +81,7 @@
 
                         <li class="quiz__option">
                             <label class="choice ">
-                                <input class="choice__input" type="checkbox" name="answer" value="1" />
+                                <input class="choice__input" type="checkbox" name="answer" value="1"/>
                                 <span class="choice__box" aria-hidden="true"></span>
                                 <span class="choice__label">Вопрос квиза</span>
                             </label>
@@ -88,7 +89,7 @@
 
                         <li class="quiz__option">
                             <label class="choice ">
-                                <input class="choice__input" type="checkbox" name="answer" value="1" />
+                                <input class="choice__input" type="checkbox" name="answer" value="1"/>
                                 <span class="choice__box" aria-hidden="true"></span>
                                 <span class="choice__label">Вопрос квиза</span>
                             </label>
@@ -105,6 +106,34 @@
     <footer class="footer">
         Учебный проект 2025
     </footer>
+</div>
+<div class="modal modal--open">
+    <div class="modal__overlay">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">
+                    Тест завершён!
+                </h2>
+                <p class="modal__subtitle">
+                    Вы ответили правильно на все вопросы 🎉
+                </p>
+            </div>
+            <div class="modal__body">
+                <p class="body__description caption">
+                    Ваши знания в UX-дизайне на высоте — вы уверенно разбираетесь в пользовательских сценариях
+                    и принципах проектирования интерфейсов.
+                </p>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--primary modal__btn" type="button">
+                    К списку квизов
+                </button>
+                <button class="btn btn--secondary modal__btn" type="button">
+                    Пройти снова
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 <script
         type="module"

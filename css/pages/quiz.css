@@ -128,3 +128,17 @@
 .quiz__submit {
     align-self: start;
 }
+
+@media (max-width: 640px) {
+    .quiz {
+        gap: var(--space-16);
+    }
+
+    .quiz__form {
+        gap: var(--space-16);
+    }
+
+    .quiz__submit {
+        align-self: stretch;
+    }
+}

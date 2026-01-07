@@ -117,6 +117,9 @@ a {
         --grid-content-columns: var(--grid-content-columns-tablet);
         --grid-gutter: var(--grid-gutter-tablet);
         --grid-margin: var(--grid-margin-tablet);
+
+        --header-height: var(--header-height-tablet);
+        --footer-height: var(--footer-height-tablet);
     }
 
     .page {
@@ -136,6 +139,17 @@ a {
         --grid-content-columns: var(--grid-content-columns-mobile);
         --grid-gutter: var(--grid-gutter-mobile);
         --grid-margin: var(--grid-margin-mobile);
+
+        --header-height: var(--header-height-mobile);
+        --footer-height: var(--footer-height-mobile);
+
+        --font-h1-size: var(--font-h2-size-base);
+        --font-h1-weight: var(--font-h2-weight-base);
+        --font-h1-line: var(--font-h2-line-base);
+
+        --font-h2-size: var(--font-h3-size-base);
+        --font-h2-weight: var(--font-h3-weight-base);
+        --font-h2-line: var(--font-h3-line-base);
     }
 
     .page {
@@ -146,5 +160,9 @@ a {
         grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
         grid-template-areas: "main main main main";
         gap: var(--grid-gutter);
+    }
+
+    .footer {
+        display: none;
     }
 }

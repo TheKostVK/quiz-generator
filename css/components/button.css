@@ -3,7 +3,7 @@
     border: solid 1px;
     border-radius: var(--radius-xs);
 
-    padding: 8px 16px;
+    padding: var(--space-8) var(--space-16);
 
     cursor: pointer;
 
@@ -40,6 +40,7 @@
 .btn--secondary {
     color: var(--color-primary);
     border: solid 1px var(--color-primary);
+    background: var(--color-surface);
 }
 
 .btn--secondary:hover {

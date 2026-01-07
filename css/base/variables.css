@@ -4,17 +4,29 @@
     --font-family-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 
     /* Headings */
-    --font-h1-size: 32px;
-    --font-h1-weight: 700;
-    --font-h1-line: 1.2;
+    --font-h1-size-base: 32px;
+    --font-h1-weight-base: 700;
+    --font-h1-line-base: 1.2;
 
-    --font-h2-size: 24px;
-    --font-h2-weight: 600;
-    --font-h2-line: 1.2;
+    --font-h2-size-base: 24px;
+    --font-h2-weight-base: 600;
+    --font-h2-line-base: 1.2;
 
-    --font-h3-size: 18px;
-    --font-h3-weight: 600;
-    --font-h3-line: 1.3;
+    --font-h3-size-base: 18px;
+    --font-h3-weight-base: 600;
+    --font-h3-line-base: 1.3;
+
+    --font-h1-size: var(--font-h1-size-base);
+    --font-h1-weight: var(--font-h1-weight-base);
+    --font-h1-line: var(--font-h1-line-base);
+
+    --font-h2-size: var(--font-h2-size-base);
+    --font-h2-weight: var(--font-h2-weight-base);
+    --font-h2-line: var(--font-h2-line-base);
+
+    --font-h3-size: var(--font-h3-size-base);
+    --font-h3-weight: var(--font-h3-weight-base);
+    --font-h3-line: var(--font-h3-line-base);
 
     --font-caption-weight: 400;
     --font-mono-weight: 400;
@@ -22,8 +34,16 @@
     /* Header */
     --header-height: 72px;
 
+    --header-height-desktop: 72px;
+    --header-height-tablet: 64px;
+    --header-height-mobile: 64px;
+
     /* Footer */
     --footer-height: 72px;
+
+    --footer-height-desktop: 72px;
+    --footer-height-tablet: 64px;
+    --footer-height-mobile: 64px;
 
     /* Body */
     --font-body-size: 16px;

@@ -20,11 +20,11 @@
         </a>
 
         <nav class="header__nav">
-
         </nav>
 
         <button class="header__burger" aria-label="Открыть меню">
-            <img src="assets/threeLines.svg" alt="раскрытие меню" class="header__burger__img"/>
+            <img src="assets/threeLines.svg" alt="" class="header__burger-icon header__burger-icon--open" />
+            <img src="assets/cross.svg" alt="" class="header__burger-icon header__burger-icon--close" />
         </button>
     </header>
     <main class="main">
@@ -54,6 +54,30 @@
     <footer class="footer">
         Учебный проект 2025
     </footer>
+</div>
+<div class="banner banner--open">
+    <div class="banner__overlay">
+        <div class="banner__content">
+            <div class="banner__header">
+                <div class="banner__logo">
+                    ❌
+                </div>
+                <h2 class="banner__title">
+                    Ошибка: не удалось обработать JSON.
+                </h2>
+            </div>
+            <div class="banner__body">
+                <p class="body__description caption">
+                    Проверьте формат данных и попробуйте снова.
+                </p>
+            </div>
+            <div class="banner__footer">
+                <button class="btn btn--secondary banner__btn" type="button">
+                    Попробовать снова
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 <script
         type="module"

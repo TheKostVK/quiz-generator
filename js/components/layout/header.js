@@ -75,7 +75,7 @@ export class Header {
             el.textContent = item.text;
 
             if (item.variant) {
-                el.className = `btn btn--${item.variant}`;
+                el.className = `btn btn--${item.variant} header__nav-item`;
             } else {
                 el.className = 'header__link';
             }
