@@ -1,40 +1,13 @@
 import {z} from 'zod';
 
 /**
- * @typedef {'single'|'multiple'} QuestionType
- */
-
-/**
- * @typedef {Object} QuizOption
- * @property {number} id
- * @property {string} text
- * @property {boolean} correct
- * @property {string} message
- */
-
-/**
- * @typedef {Object} QuizQuestion
- * @property {number} id
- * @property {string} text
- * @property {QuestionType} type
- * @property {QuizOption[]} options
- */
-
-/**
- * @typedef {Object} QuizData
- * @property {string} title
- * @property {string} description
- * @property {QuizQuestion[]} questions
- */
-
-/**
  * Zod schema: option
  */
 export const OptionSchema = z.object({
     id: z.number().int().positive(),
-    text: z.string().min(1, 'Option text is required'),
+    text: z.string().min(1, 'Текст варианта ответа обязателен'),
     correct: z.boolean(),
-    message: z.string().min(1, 'Option message is required'),
+    message: z.string().min(1, 'Сообщение для варианта ответа обязательно'),
 });
 
 /**
@@ -50,30 +23,28 @@ export const OptionSchema = z.object({
 export const QuestionSchema = z
     .object({
         id: z.number().int().positive(),
-        text: z.string().min(1, 'Question text is required'),
+        text: z.string().min(1, 'Текст вопроса обязателен'),
         type: z.enum(['single', 'multiple']),
-        options: z.array(OptionSchema).min(2, 'At least 2 options required'),
+        options: z.array(OptionSchema).min(2, 'Должно быть минимум 2 варианта ответа'),
     })
     .superRefine((q, ctx) => {
-        // 1) option ids unique
         const ids = q.options.map((o) => o.id);
         const unique = new Set(ids);
         if (unique.size !== ids.length) {
             ctx.addIssue({
                 code: 'custom',
                 path: ['options'],
-                message: 'Option ids must be unique within a question',
+                message: 'ID вариантов ответа должны быть уникальны в рамках одного вопроса',
             });
         }
 
-        // 2) correctness constraints
         const correctCount = q.options.reduce((acc, o) => acc + (o.correct ? 1 : 0), 0);
 
         if (q.type === 'single' && correctCount !== 1) {
             ctx.addIssue({
                 code: 'custom',
                 path: ['options'],
-                message: 'For single questions exactly 1 option must be correct',
+                message: 'Для одиночного выбора ровно один вариант должен быть правильным',
             });
         }
 
@@ -81,7 +52,7 @@ export const QuestionSchema = z
             ctx.addIssue({
                 code: 'custom',
                 path: ['options'],
-                message: 'For multiple questions at least 1 option must be correct',
+                message: 'Для множественного выбора должен быть хотя бы один правильный вариант',
             });
         }
     });
@@ -96,9 +67,9 @@ export const QuestionSchema = z
  */
 export const QuizSchema = z
     .object({
-        title: z.string().min(1, 'Title is required'),
-        description: z.string().min(1, 'Description is required'),
-        questions: z.array(QuestionSchema).min(1, 'At least 1 question required'),
+        title: z.string().min(1, 'Название теста обязательно'),
+        description: z.string().min(1, 'Описание теста обязательно'),
+        questions: z.array(QuestionSchema).min(1, 'Должен быть минимум 1 вопрос'),
     })
     .superRefine((quiz, ctx) => {
         const qIds = quiz.questions.map((q) => q.id);
@@ -107,31 +78,17 @@ export const QuizSchema = z
             ctx.addIssue({
                 code: 'custom',
                 path: ['questions'],
-                message: 'Question ids must be unique within a quiz',
+                message: 'ID вопросов должны быть уникальны в рамках одного теста',
             });
         }
     });
 
 /**
- * Результат валидации для UI.
- * @typedef {Object} ValidationResult
- * @property {true} ok
- * @property {QuizData} data
- *
- * @typedef {Object} ValidationErrorResult
- * @property {false} ok
- * @property {string} message
- * @property {Array<{path: string, message: string}>} issues
- */
-
-/**
- * Валидатор JSON квиза на основе Zod.
+ * Валидатор JSON квиза на основе Zod
  */
 export class QuizValidator {
     /**
-     * Парсит строку как JSON и валидирует по Zod-схеме.
-     * @param {string} jsonString
-     * @returns {ValidationResult | ValidationErrorResult}
+     * Парсит строку как JSON и валидирует по Zod-схеме
      */
     static validateJson(jsonString) {
         const raw = QuizValidator.#parseJson(jsonString);
@@ -155,30 +112,7 @@ export class QuizValidator {
     }
 
     /**
-     * Валидирует уже готовый объект.
-     * @param {unknown} data
-     * @returns {ValidationResult | ValidationErrorResult}
-     */
-    static validateData(data) {
-        const parsed = QuizSchema.safeParse(data);
-        if (parsed.success) return {ok: true, data: parsed.data};
-
-        const issues = parsed.error.issues.map((i) => ({
-            path: i.path.join('.'),
-            message: i.message,
-        }));
-
-        return {
-            ok: false,
-            message: QuizValidator.#formatIssuesMessage(issues),
-            issues,
-        };
-    }
-
-    /**
-     * JSON.parse с безопасной обработкой ошибок.
-     * @param {string} jsonString
-     * @returns {{ok:true,data:unknown} | {ok:false,message:string,issues:Array<{path:string,message:string}>}}
+     * JSON.parse с безопасной обработкой ошибок
      */
     static #parseJson(jsonString) {
         if (typeof jsonString !== 'string' || jsonString.trim() === '') {
@@ -195,7 +129,7 @@ export class QuizValidator {
                 return {
                     ok: false,
                     message: 'JSON должен быть объектом',
-                    issues: [{path: '', message: 'Ожидается объект, получено null/primitive'}],
+                    issues: [{path: '', message: 'Ожидается объект, получено null/примитив'}],
                 };
             }
             return {ok: true, data};
@@ -209,9 +143,7 @@ export class QuizValidator {
     }
 
     /**
-     * Собирает одно сообщение для toast/modal.
-     * @param {Array<{path:string,message:string}>} issues
-     * @returns {string}
+     * Собирает одно сообщение для toast/modal
      */
     static #formatIssuesMessage(issues) {
         const first = issues[0];
@@ -219,4 +151,4 @@ export class QuizValidator {
 
         return first.path ? `${first.path}: ${first.message}` : first.message;
     }
-}
+}1

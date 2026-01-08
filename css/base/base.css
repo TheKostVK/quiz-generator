@@ -24,6 +24,17 @@ body {
     padding: 0 43px;
 }
 
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
 h1, h2, h3 {
     font-kerning: normal;
     font-feature-settings: "kern" 1;

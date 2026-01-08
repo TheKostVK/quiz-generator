@@ -9,6 +9,7 @@ export class QuizCardGenerator {
         this.template = cardTemplate;
     }
 
+    // Получает элемент node
     getNodeElement({id, title, description, questions}) {
         if (!this.template) throw new Error('Template #quiz-card-template not found');
         if (!id) throw new Error('QuizCard: id is required');

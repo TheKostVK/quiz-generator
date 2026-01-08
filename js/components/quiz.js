@@ -1,94 +1,187 @@
 export class Quiz {
-    /**
-     * Загруженный квиз (JSON-объект из IndexedDB)
-     * @type {QuizData | null}
-     */
-    quiz = null;
+    #quiz = null;
+    #currentQuestionNumber = 1;
+    #questionsState = new Map();
+    #mode = "answer";
 
-    /**
-     * Ответы пользователя по вопросам.
-     * key = questionId, value = { correct, userOptions }
-     * @type {Map<number, {correct: boolean, userOptions: number[]}>}
-     */
-    userAnswers = new Map();
+    constructor(quizData) {
+        if (!quizData || !Array.isArray(quizData.questions)) {
+            throw new Error("Quiz: invalid quizData");
+        }
 
-    constructor(quizData, userAnswersData = new Map()) {
-        this.quiz = quizData;
-        this.userAnswers = userAnswersData;
-    }
-
-    resetQuiz() {
-        this.userAnswers = new Map();
-    }
-
-    getNextQuestion() {
-        if (this.quiz === null) return null;
-
-        const currentQuestion = this.userAnswers.size;
-
-        return this.quiz.questions[currentQuestion];
+        this.#quiz = quizData;
+        this.#initQuestionsState();
     }
 
     /**
-     * Сохраняет ответ пользователя.
-     * @param {number} questionId
-     * @param {number[]} userOptions
+     * Инициализирует состояние всех вопросов при получении квиза.
      */
-    setAnswerQuestion(questionId, userOptions) {
-        if (!this.quiz) return;
+    #initQuestionsState() {
+        if (!this.#quiz) return;
 
-        const question = this.quiz.questions.find((question) => question.id === questionId);
+        this.#questionsState = new Map();
 
-        if (!question) return;
-
-        const result = [];
-        let correct = true;
-        question.options.map((quizOption) => {
-            const include = userOptions.includes(quizOption.id);
-
-            if (quizOption.correct && !include || !quizOption.correct && include) {
-                result.push({...quizOption, selected: include});
-                correct = false;
-            } else if (quizOption.correct) {
-                result.push({...quizOption, selected: include});
-            }
+        this.#quiz.questions.forEach((q) => {
+            this.#questionsState.set(q.id, {
+                questionId: q.id,
+                stage: "idle",
+                correct: null,
+                selectedOptionIds: [],
+            });
         });
 
-        this.userAnswers.set(questionId, {userOptions, correct});
-
-        return result;
+        this.#currentQuestionNumber = 1;
+        this.#mode = "answer";
     }
 
     /**
-     * Возвращает результат тестирования.
-     * @returns {{ correctCount: number, total: number, percent: number, status: 'bad'|'good'|'complete' } | null}
+     * Кол-во вопросов в квизе
+     */
+    questionsCount() {
+        if (!this.#quiz) return 0;
+        return this.#quiz.questions.length;
+    }
+
+    /**
+     * Текущий режим UI
+     */
+    getMode() {
+        return this.#mode;
+    }
+
+    /**
+     * Получить текущий вопрос
+     */
+    getCurrentQuestion() {
+        if (!this.#quiz) return null;
+
+        const idx = this.#currentQuestionNumber - 1;
+        const question = this.#quiz.questions[idx];
+        if (!question) return null;
+
+        return { question, questionNumber: this.#currentQuestionNumber };
+    }
+
+    /**
+     * Перейти к следующему вопросу
+     * Сбрасывает режим на answer
+     */
+    nextQuestion() {
+        if (!this.#quiz) return null;
+
+        const next = this.#currentQuestionNumber + 1;
+        if (next > this.#quiz.questions.length) return null;
+
+        this.#currentQuestionNumber = next;
+        this.#mode = "answer";
+
+        return this.getCurrentQuestion();
+    }
+
+    /**
+     * Является ли текущий вопрос последним
+     */
+    isLastQuestion() {
+        if (!this.#quiz) return true;
+        return this.#currentQuestionNumber >= this.#quiz.questions.length;
+    }
+
+    /**
+     * Проверяет выбранные варианты и сохраняет состояние вопроса.
+     * После вызова режим становится review
+     *
+     * Логика:
+     * - correct: true только если выбранный набор == набору правильных
+     * - checkedOptionIds: если ответ НЕ полностью правильный, добавляем недостающие correct варианты
+     * - highlightOptionIds: всегда = выбранные пользователем и правильные
+     * - optionsView.selected строится по checkedOptionIds
+     */
+    answerQuestion(questionId, userOptionIds) {
+        if (!this.#quiz) throw new Error("Quiz: quiz is not loaded");
+
+        const question = this.#quiz.questions.find((q) => q.id === questionId);
+        if (!question) throw new Error(`Quiz: question ${questionId} not found`);
+
+        const userSelected = Array.isArray(userOptionIds) ? userOptionIds : [];
+        const userSelectedSet = new Set(userSelected);
+
+        const correctIds = question.options.filter((o) => o.correct).map((o) => o.id);
+        const correctSet = new Set(correctIds);
+
+        const isCorrect =
+            userSelectedSet.size === correctSet.size &&
+            [...userSelectedSet].every((id) => correctSet.has(id));
+
+        const checkedSet = new Set(userSelectedSet);
+
+        if (!isCorrect) {
+            correctSet.forEach((id) => checkedSet.add(id));
+        }
+
+        const highlightSet = new Set([...userSelectedSet, ...correctSet]);
+
+        const checkedOptionIds = [...checkedSet];
+        const highlightOptionIds = [...highlightSet];
+
+        const optionsView = question.options.map((o) => ({
+            ...o,
+            selected: checkedSet.has(o.id),
+        }));
+
+        const st = this.#questionsState.get(questionId);
+
+        if (!st) {
+            this.#questionsState.set(questionId, {
+                questionId,
+                stage: "answered",
+                correct: isCorrect,
+                selectedOptionIds: [...userSelectedSet],
+            });
+        } else {
+            st.stage = "answered";
+            st.correct = isCorrect;
+            st.selectedOptionIds = [...userSelectedSet];
+        }
+
+        this.#mode = "review";
+
+        return {
+            correct: isCorrect,
+            checkedOptionIds,
+            highlightOptionIds,
+            optionsView,
+        };
+    }
+
+    /**
+     * Возвращает итоговую статистику
      */
     getQuizResult() {
-        if (!this.quiz) return null;
+        if (!this.#quiz) return null;
 
-        const total = this.quiz.questions.length;
+        const total = this.#quiz.questions.length;
+
         let correctCount = 0;
-
-        this.userAnswers.forEach((answer) => {
-            if (answer.correct) {
-                correctCount += 1;
-            }
+        this.#questionsState.forEach((st) => {
+            if (st.correct === true) correctCount += 1;
         });
 
         const percent = total === 0 ? 0 : Math.round((correctCount / total) * 100);
 
-        let status = 'bad';
+        let status = "bad";
+
         if (percent === 100) {
-            status = 'complete';
+            status = "complete";
         } else if (percent >= 51) {
-            status = 'good';
+            status = "good";
         }
 
-        return {
-            correctCount,
-            total,
-            percent,
-            status,
-        };
+        return { correctCount, total, percent, status };
+    }
+
+    reset() {
+        this.#currentQuestionNumber = 1;
+        this.#mode = "answer";
+        this.#questionsState.clear();
     }
 }

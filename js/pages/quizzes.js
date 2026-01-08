@@ -17,6 +17,7 @@ header.setMenuItems([
     { text: "Добавить квиз", href: "/index.html", variant: "primary" },
 ]);
 
+// Рендер квизов
 const renderQuizzes = async () => {
     try {
         const data = await getAllQuizzes();

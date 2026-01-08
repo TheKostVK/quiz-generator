@@ -14,25 +14,25 @@ export const dbPromise = IndexedDBService.open(quizzesDBName, quizzesDBVersion, 
 
 export async function saveQuiz(quiz) {
     const db = await dbPromise;
-    return db.put('quizzes', { id: nanoid(), ...quiz });
+    return db.put(quizzesTableName, { id: nanoid(), ...quiz });
 }
 
 export async function getQuiz(id) {
     const db = await dbPromise;
-    return db.get('quizzes', id);
+    return db.get(quizzesTableName, id);
 }
 
 export async function getAllQuizzes() {
     const db = await dbPromise;
-    return db.getAll('quizzes');
+    return db.getAll(quizzesTableName);
 }
 
-export async function deleteQuiz(id) {
+export async function saveProcessedQuiz(quiz) {
     const db = await dbPromise;
-    return db.delete('quizzes', id);
+    return db.put(processedQuizzesTableName, { id: nanoid(), ...quiz });
 }
 
-export async function clearQuizzes() {
+export async function getProcessedQuiz(id) {
     const db = await dbPromise;
-    return db.clear('quizzes');
+    return db.get(processedQuizzesTableName, id);
 }

@@ -39,8 +39,7 @@
             </header>
 
             <div class="quiz__progress">
-                <p class="quiz__progress-text">Вопрос <span class="quiz__progress-current">1</span> из <span
-                        class="quiz__progress-total">7</span></p>
+                <p class="quiz__progress-text">Вопрос <span class="quiz__progress-current">1</span> из <span class="quiz__progress-total">7</span></p>
                 <div
                         class="quiz__progress-bar"
                         role="progressbar"
@@ -61,39 +60,9 @@
                     <p class="quiz__question-subtitle caption">Выберите один вариант ответа</p>
                 </div>
 
-                <form class="quiz__form">
+                <form name="quiz" class="quiz__form">
                     <ul class="quiz__options" role="list">
-                        <li class="quiz__option">
-                            <label class="choice ">
-                                <input class="choice__input" type="checkbox" name="answer" value="1"/>
-                                <span class="choice__box" aria-hidden="true"></span>
-                                <span class="choice__label">Вопрос квиза</span>
-                            </label>
-                        </li>
 
-                        <li class="quiz__option">
-                            <label class="choice ">
-                                <input class="choice__input" type="checkbox" name="answer" value="1"/>
-                                <span class="choice__box" aria-hidden="true"></span>
-                                <span class="choice__label">Вопрос квиза</span>
-                            </label>
-                        </li>
-
-                        <li class="quiz__option">
-                            <label class="choice ">
-                                <input class="choice__input" type="checkbox" name="answer" value="1"/>
-                                <span class="choice__box" aria-hidden="true"></span>
-                                <span class="choice__label">Вопрос квиза</span>
-                            </label>
-                        </li>
-
-                        <li class="quiz__option">
-                            <label class="choice ">
-                                <input class="choice__input" type="checkbox" name="answer" value="1"/>
-                                <span class="choice__box" aria-hidden="true"></span>
-                                <span class="choice__label">Вопрос квиза</span>
-                            </label>
-                        </li>
                     </ul>
 
                     <button class="btn btn--primary quiz__submit" type="submit">
@@ -107,7 +76,7 @@
         Учебный проект 2025
     </footer>
 </div>
-<div class="modal modal--open">
+<div class="modal">
     <div class="modal__overlay">
         <div class="modal__content">
             <div class="modal__header">
@@ -125,16 +94,35 @@
                 </p>
             </div>
             <div class="modal__footer">
-                <button class="btn btn--primary modal__btn" type="button">
+                <button class="btn btn--primary modal__close-btn" type="button">
                     К списку квизов
                 </button>
-                <button class="btn btn--secondary modal__btn" type="button">
+                <button class="btn btn--secondary modal__restart-btn" type="button">
                     Пройти снова
                 </button>
             </div>
         </div>
     </div>
 </div>
+<template id="quiz_option">
+    <li class="quiz__option">
+        <label class="choice">
+            <input class="choice__input" type="checkbox" name="1" value="true"/>
+            <span class="choice__box" aria-hidden="true"></span>
+            <span class="choice__label">Вопрос квиза</span>
+        </label>
+    </li>
+</template>
+<template id="quiz_option-answer">
+    <li class="quiz__option">
+        <label class="choice">
+            <input class="choice__input" type="checkbox" name="1" value="true"/>
+            <span class="choice__box" aria-hidden="true"></span>
+            <span class="choice__label">Вопрос квиза</span>
+        </label>
+        <span class="choice__hint caption">Текст</span>
+    </li>
+</template>
 <script
         type="module"
         src="./js/pages/quiz.js"></script>

@@ -1,7 +1,7 @@
 import {nanoid} from "nanoid";
 
 /**
- * Генератор квизов: валидирует JSON и сохраняет квиз в IndexedDB.
+ * Генератор квизов: валидирует JSON и сохраняет квиз в IndexedDB
  */
 export class QuizGenerator {
     quizValidator = null;
@@ -18,9 +18,6 @@ export class QuizGenerator {
      * Возвращает:
      * - ok=true: { ok:true, data: QuizData, id: string }
      * - ok=false: как вернул валидатор или ошибка БД
-     *
-     * @param {string} quizData JSON строка из textarea
-     * @returns {Promise<any>}
      */
     async setQuizData(quizData) {
         const res = this.quizValidator.validateJson(quizData);

@@ -1,5 +1,4 @@
 export class IndexedDBService {
-    /** @type {IDBDatabase|null} */
     #db = null;
 
     constructor(db) {
@@ -8,11 +7,6 @@ export class IndexedDBService {
 
     /**
      * Открывает БД и выполняет upgrade при необходимости
-     *
-     * @param {string} name
-     * @param {number} version
-     * @param {(db: IDBDatabase, oldVersion: number, newVersion: number | null) => void} [onUpgrade]
-     * @returns {Promise<IndexedDBService>}
      */
     static open(name, version, onUpgrade) {
         return new Promise((resolve, reject) => {

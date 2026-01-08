@@ -3,11 +3,12 @@ import {QuizValidator} from "../utils/validation";
 import {QuizGenerator} from "../components/quizGenerator";
 import {saveQuiz} from "../utils/storage";
 
-const form = document.querySelector(".quiz-generator__form");
+const form = document.forms['json-quiz-generator'];
 const submitBtn = document.querySelector(".quiz-generator__submit");
 const textArea = document.querySelector(".quiz-generator__input");
 
 const banner = document.querySelector(".banner");
+const bannerDescription = banner.querySelector(".body__description");
 const bannerCloseBtn = banner.querySelector(".banner__btn");
 
 if (!form) throw new Error('main: .quiz-generator__form not found');
@@ -40,6 +41,7 @@ const inputJSONHandler = async (e) => {
         bannerCloseBtn.addEventListener("click", bannerCloseBtnHandler);
 
         textArea.classList.add("quiz-generator__input--error");
+        bannerDescription.textContent = res.message;
 
         console.error(res);
     } else {

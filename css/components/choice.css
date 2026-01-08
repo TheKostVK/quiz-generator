@@ -51,8 +51,8 @@
 .choice__box {
     position: relative;
 
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
 
     border: 1px solid var(--color-primary);
     border-radius: var(--radius-xs);
@@ -61,17 +61,25 @@
 .choice__box::after {
     content: "";
     position: absolute;
-    inset: 4px;
 
     border-radius: inherit;
 
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 10px 10px;
+    background-size: 12px 12px;
 
     opacity: 0;
     transform: scale(0.9);
     transition: opacity var(--animation-normal), transform var(--animation-normal);
+}
+
+.choice:not(.choice--radio) .choice__box::after {
+    inset: 0;
+}
+
+.choice--radio .choice__box::after {
+    inset: 4px !important;
+    background-size: 10px 10px;
 }
 
 .choice__input:checked + .choice__box::after {
