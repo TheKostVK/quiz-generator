@@ -1,6 +1,7 @@
 import { Header } from "../components/header";
 import { QuizCardGenerator } from "../components/quizCard";
 import { getAllQuizzes } from "../utils/storage";
+import {BASE_URL} from "../../constatns";
 
 const quizzesSection = document.querySelector(".quizzes");
 const quizzesListTemplate = document.getElementById("quizzes-list");
@@ -14,7 +15,7 @@ const header = new Header();
 const quizCardGenerator = new QuizCardGenerator();
 
 header.setMenuItems([
-    { text: "Добавить квиз", href: "/index.html", variant: "primary" },
+    { text: "Добавить квиз", href: `${BASE_URL}index.html`, variant: "primary" },
 ]);
 
 // Рендер квизов

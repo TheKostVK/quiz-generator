@@ -2,6 +2,7 @@ import {Header} from "../components/header";
 import {QuizValidator} from "../utils/validation";
 import {QuizGenerator} from "../components/quizGenerator";
 import {saveQuiz} from "../utils/storage";
+import {BASE_URL} from "../../constatns";
 
 const form = document.forms['json-quiz-generator'];
 const submitBtn = document.querySelector(".quiz-generator__submit");
@@ -18,7 +19,7 @@ if (!banner) throw new Error('main: .quiz-generator__banner not found');
 
 const header = new Header();
 header.setMenuItems([
-    {text: "Посмотреть сохранённые квизы", href: "/quizzes.html", variant: "secondary"},
+    {text: "Посмотреть сохранённые квизы", href: `${BASE_URL}quizzes.html`, variant: "secondary"},
 ]);
 
 const quizGenerator = new QuizGenerator(QuizValidator, saveQuiz);
@@ -45,7 +46,7 @@ const inputJSONHandler = async (e) => {
 
         console.error(res);
     } else {
-        window.location.href = '/quizzes.html';
+        window.location.href = `${BASE_URL}quizzes.html`;
     }
 };
 

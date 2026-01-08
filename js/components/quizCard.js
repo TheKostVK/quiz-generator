@@ -1,3 +1,5 @@
+import {BASE_URL} from "../../constatns";
+
 export class QuizCardGenerator {
     template = null;
 
@@ -29,7 +31,7 @@ export class QuizCardGenerator {
         titleEl.textContent = title;
         descEl.textContent = description;
         countEl.textContent = `${questionCount} вопросов`;
-        actionEl.href = `/quiz.html?id=${encodeURIComponent(id)}`;
+        actionEl.href = `${BASE_URL}quiz.html?id=${encodeURIComponent(id)}`;
 
         return fragment;
     }

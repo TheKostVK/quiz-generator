@@ -3,6 +3,7 @@ import {Header} from "../components/header";
 import {getQuiz} from "../utils/storage";
 import {QuizRouter} from "../components/quizRouter";
 import {QuizOptionCard} from "../components/quizOptionCard";
+import {BASE_URL} from "../../constatns";
 
 // ---------- DOM ----------
 const quizElement = document.querySelector(".quiz");
@@ -52,7 +53,7 @@ if (!quizData) throw new Error("quiz.js: quiz not found in IndexedDB");
 
 const header = new Header();
 header.setMenuItems([
-    {text: "Посмотреть сохранённые квизы", href: "/quizzes.html", variant: "secondary"},
+    {text: "Посмотреть сохранённые квизы", href: `${BASE_URL}quizzes.html`, variant: "secondary"},
 ]);
 
 const quiz = new Quiz(quizData);
@@ -255,8 +256,8 @@ const handleSubmitForm = (e) => {
 };
 
 // Обработка закрытия квиза
-const handleCloseQuiz = (e) => {
-    window.location.href = '/quizzes.html';
+const handleCloseQuiz = () => {
+    window.location.href = `${BASE_URL}quizzes.html`;
 };
 
 // Обработка перезапуска квиза
