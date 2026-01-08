@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"/>
+    <title>Прохождение теста</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+          rel="stylesheet"/>
+  <script type="module" crossorigin src="/quiz-generator/assets/quiz-wIJtkN_7.js"></script>
+  <link rel="modulepreload" crossorigin href="/quiz-generator/assets/storage-B-FzcZQP.js">
+  <link rel="stylesheet" crossorigin href="/quiz-generator/assets/storage-6N2ZyFdR.css">
+  <link rel="stylesheet" crossorigin href="/quiz-generator/assets/quiz-BH0TogrO.css">
+</head>
+<body>
+<div class="page">
+    <header class="header">
+        <a class="header__main-link" href="/">
+            <img src="/quiz-generator/assets/logo-CsdLGdJ6.svg" alt="логотип" class="header__logo"/>
+        </a>
+
+        <nav class="header__nav">
+        </nav>
+
+        <button class="header__burger" aria-label="Открыть меню">
+            <img src="data:image/svg+xml,%3csvg%20width='44'%20height='44'%20viewBox='0%200%2044%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8%2012H36'%20stroke='%231E40FF'%20stroke-width='2'/%3e%3cpath%20d='M8%2022H36'%20stroke='%231E40FF'%20stroke-width='2'/%3e%3cpath%20d='M8%2032H36'%20stroke='%231E40FF'%20stroke-width='2'/%3e%3c/svg%3e" alt="" class="header__burger-icon header__burger-icon--open" />
+            <img src="data:image/svg+xml,%3csvg%20width='44'%20height='44'%20viewBox='0%200%2044%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M10%2034L34%2010'%20stroke='%233B82F6'%20stroke-width='2'/%3e%3cpath%20d='M34%2034L10%2010'%20stroke='%233B82F6'%20stroke-width='2'/%3e%3c/svg%3e" alt="" class="header__burger-icon header__burger-icon--close" />
+        </button>
+    </header>
+    <main class="main">
+        <section class="quiz">
+            <header class="quiz__header">
+                <h1 class="quiz__title">Квиз: UX-дизайн и пользовательские сценарии</h1>
+                <p class="quiz__subtitle">
+                    Квиз о паттернах UX, исследовании пользователей и принципах визуальной иерархии.
+                </p>
+            </header>
+
+            <div class="quiz__progress">
+                <p class="quiz__progress-text">Вопрос <span class="quiz__progress-current">1</span> из <span class="quiz__progress-total">7</span></p>
+                <div
+                        class="quiz__progress-bar"
+                        role="progressbar"
+                        aria-valuemin="1"
+                        aria-valuemax="7"
+                        aria-valuenow="1"
+                        aria-label="Прогресс прохождения"
+                >
+                    <div class="quiz__progress-fill"></div>
+                </div>
+            </div>
+
+            <section class="quiz__question" aria-labelledby="question-title">
+                <div class="quiz__question-header">
+                    <h2 class="quiz__question-title" id="question-title">
+                        Что из перечисленного является примером user flow?
+                    </h2>
+                    <p class="quiz__question-subtitle caption">Выберите один вариант ответа</p>
+                </div>
+
+                <form name="quiz" class="quiz__form">
+                    <ul class="quiz__options" role="list">
+
+                    </ul>
+
+                    <button class="btn btn--primary quiz__submit" type="submit">
+                        Ответить
+                    </button>
+                </form>
+            </section>
+        </section>
+    </main>
+    <footer class="footer">
+        Учебный проект 2025
+    </footer>
+</div>
+<div class="modal">
+    <div class="modal__overlay">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">
+                    Тест завершён!
+                </h2>
+                <p class="modal__subtitle">
+                    Вы ответили правильно на все вопросы 🎉
+                </p>
+            </div>
+            <div class="modal__body">
+                <p class="body__description caption">
+                    Ваши знания в UX-дизайне на высоте — вы уверенно разбираетесь в пользовательских сценариях
+                    и принципах проектирования интерфейсов.
+                </p>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--primary modal__close-btn" type="button">
+                    К списку квизов
+                </button>
+                <button class="btn btn--secondary modal__restart-btn" type="button">
+                    Пройти снова
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<template id="quiz_option">
+    <li class="quiz__option">
+        <label class="choice">
+            <input class="choice__input" type="checkbox" name="1" value="true"/>
+            <span class="choice__box" aria-hidden="true"></span>
+            <span class="choice__label">Вопрос квиза</span>
+        </label>
+    </li>
+</template>
+<template id="quiz_option-answer">
+    <li class="quiz__option">
+        <label class="choice">
+            <input class="choice__input" type="checkbox" name="1" value="true"/>
+            <span class="choice__box" aria-hidden="true"></span>
+            <span class="choice__label">Вопрос квиза</span>
+        </label>
+        <span class="choice__hint caption">Текст</span>
+    </li>
+</template>
+</body>
+</html>

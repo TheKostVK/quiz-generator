@@ -1,0 +1,23 @@
+# dependencies
+/node_modules
+
+# build dir
+/dist
+
+
+# Temporary folders
+tmp/
+temp/
+
+# Vite
+.vite
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

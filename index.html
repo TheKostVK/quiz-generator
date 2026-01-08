@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Генератор квизов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+          rel="stylesheet"/>
+  <script type="module" crossorigin src="/quiz-generator/assets/main-BVgRksPh.js"></script>
+  <link rel="modulepreload" crossorigin href="/quiz-generator/assets/storage-B-FzcZQP.js">
+  <link rel="stylesheet" crossorigin href="/quiz-generator/assets/storage-6N2ZyFdR.css">
+  <link rel="stylesheet" crossorigin href="/quiz-generator/assets/main-BIhz-Cw2.css">
+</head>
+<body>
+<div class="page">
+    <header class="header">
+        <a class="header__main-link" href="/">
+            <img src="/quiz-generator/assets/logo-CsdLGdJ6.svg" alt="логотип" class="header__logo"/>
+        </a>
+
+        <nav class="header__nav">
+        </nav>
+
+        <button class="header__burger" aria-label="Открыть меню">
+            <img src="data:image/svg+xml,%3csvg%20width='44'%20height='44'%20viewBox='0%200%2044%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8%2012H36'%20stroke='%231E40FF'%20stroke-width='2'/%3e%3cpath%20d='M8%2022H36'%20stroke='%231E40FF'%20stroke-width='2'/%3e%3cpath%20d='M8%2032H36'%20stroke='%231E40FF'%20stroke-width='2'/%3e%3c/svg%3e" alt="" class="header__burger-icon header__burger-icon--open" />
+            <img src="data:image/svg+xml,%3csvg%20width='44'%20height='44'%20viewBox='0%200%2044%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M10%2034L34%2010'%20stroke='%233B82F6'%20stroke-width='2'/%3e%3cpath%20d='M34%2034L10%2010'%20stroke='%233B82F6'%20stroke-width='2'/%3e%3c/svg%3e" alt="" class="header__burger-icon header__burger-icon--close" />
+        </button>
+    </header>
+    <main class="main">
+        <section class="quiz-generator">
+            <div class="quiz-generator__header">
+                <h1 class="quiz-generator__title">Генератор квизов</h1>
+                <p class="quiz-generator__subtitle">Вставьте JSON...</p>
+            </div>
+
+            <form name="json-quiz-generator" class="quiz-generator__form">
+                <label class="quiz-generator__label">
+                <span class="caption">
+                     Ваш JSON
+                </span>
+                    <textarea name="json-quiz-generator-input" class="quiz-generator__input" rows="10" cols="50"
+                              placeholder="{
+«title»: «Placeholder»,
+«questions»: []
+}"
+                    ></textarea>
+                </label>
+
+                <button class="btn btn--primary quiz-generator__submit" type="submit">
+                    Сгенерировать
+                </button>
+            </form>
+        </section>
+    </main>
+    <footer class="footer">
+        Учебный проект 2025
+    </footer>
+</div>
+<div class="banner">
+    <div class="banner__overlay">
+        <div class="banner__content">
+            <div class="banner__header">
+                <div class="banner__logo">
+                    ❌
+                </div>
+                <p class="banner__title">
+                    Ошибка: не удалось обработать JSON.
+                </p>
+            </div>
+            <div class="banner__body">
+                <p class="body__description caption">
+                    Проверьте формат данных и попробуйте снова.
+                </p>
+            </div>
+            <div class="banner__footer">
+                <button class="btn btn--secondary banner__btn" type="button">
+                    Попробовать снова
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

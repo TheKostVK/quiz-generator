@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"/>
+    <title>Ваши квизы</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+          rel="stylesheet"/>
+  <script type="module" crossorigin src="/quiz-generator/assets/quizzes-Dng1GdBp.js"></script>
+  <link rel="modulepreload" crossorigin href="/quiz-generator/assets/storage-B-FzcZQP.js">
+  <link rel="stylesheet" crossorigin href="/quiz-generator/assets/storage-6N2ZyFdR.css">
+  <link rel="stylesheet" crossorigin href="/quiz-generator/assets/quizzes-B6750ZlB.css">
+</head>
+<body>
+<div class="page">
+    <header class="header">
+        <a class="header__main-link" href="/">
+            <img src="/quiz-generator/assets/logo-CsdLGdJ6.svg" alt="логотип" class="header__logo"/>
+        </a>
+
+        <nav class="header__nav">
+        </nav>
+
+        <button class="header__burger" aria-label="Открыть меню">
+            <img src="data:image/svg+xml,%3csvg%20width='44'%20height='44'%20viewBox='0%200%2044%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M8%2012H36'%20stroke='%231E40FF'%20stroke-width='2'/%3e%3cpath%20d='M8%2022H36'%20stroke='%231E40FF'%20stroke-width='2'/%3e%3cpath%20d='M8%2032H36'%20stroke='%231E40FF'%20stroke-width='2'/%3e%3c/svg%3e" alt="" class="header__burger-icon header__burger-icon--open"/>
+            <img src="data:image/svg+xml,%3csvg%20width='44'%20height='44'%20viewBox='0%200%2044%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M10%2034L34%2010'%20stroke='%233B82F6'%20stroke-width='2'/%3e%3cpath%20d='M34%2034L10%2010'%20stroke='%233B82F6'%20stroke-width='2'/%3e%3c/svg%3e" alt="" class="header__burger-icon header__burger-icon--close"/>
+        </button>
+    </header>
+    <main class="main">
+        <section class="quizzes">
+
+        </section>
+    </main>
+    <footer class="footer">
+        Учебный проект 2025
+    </footer>
+</div>
+<template id="quiz-card">
+    <article class="quiz-card">
+        <h3 class="quiz-card__title">Основы JavaScript</h3>
+
+        <p class="quiz-card__description">
+            Проверьте, насколько хорошо вы разбираетесь в базовых концепциях JS:
+            типы данных, функции, область видимости и замыкания.
+        </p>
+
+        <div class="quiz-card__footer">
+            <span class="quiz-card__questions-count">10 вопросов</span>
+
+            <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
+                Пройти
+            </a>
+        </div>
+    </article>
+</template>
+<template id="quizzes-list">
+    <header class="quizzes__header">
+        <h1 class="quizzes__title">Ваши квизы</h1>
+    </header>
+    <div class="quizzes__content">
+
+    </div>
+</template>
+<template id="quizzes-empty">
+    <div class="quizzes__empty">
+        <h1 class="quizzes__empty-title">У вас нет сохранённых квизов(</h1>
+        <p class="quizzes__empty-subtitle caption">Но вы можете добавить!</p>
+        <a class="btn btn--primary quizzes__empty-action" href="/index.html">Добавить квиз</a>
+    </div>
+</template>
+</body>
+</html>
