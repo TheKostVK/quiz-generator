@@ -25,6 +25,13 @@
     color: var(--color-text-secondary);
 }
 
+.quiz-generator__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-32);
+}
+
 .quiz-generator__label {
     display: flex;
     flex-direction: column;

@@ -27,85 +27,196 @@ import {z} from 'zod';
  * @property {QuizQuestion[]} questions
  */
 
-const OptionSchema = z.object({
+/**
+ * Zod schema: option
+ */
+export const OptionSchema = z.object({
     id: z.number().int().positive(),
-    text: z.string().min(1, 'option.text не должен быть пустым'),
+    text: z.string().min(1, 'Option text is required'),
     correct: z.boolean(),
-    message: z.string().min(1, 'option.message не должен быть пустым'),
+    message: z.string().min(1, 'Option message is required'),
 });
 
-const QuestionSchema = z
+/**
+ * Zod schema: question
+ *
+ * Правила:
+ * - id уникален в рамках questions
+ * - options: минимум 2
+ * - option.id уникальны внутри options
+ * - для single: ровно 1 correct=true
+ * - для multiple: минимум 1 correct=true
+ */
+export const QuestionSchema = z
     .object({
         id: z.number().int().positive(),
-        text: z.string().min(1, 'question.text не должен быть пустым'),
+        text: z.string().min(1, 'Question text is required'),
         type: z.enum(['single', 'multiple']),
-        options: z.array(OptionSchema).min(2, 'options должно содержать минимум 2 варианта'),
+        options: z.array(OptionSchema).min(2, 'At least 2 options required'),
     })
     .superRefine((q, ctx) => {
+        // 1) option ids unique
         const ids = q.options.map((o) => o.id);
-
-        if (new Set(ids).size !== ids.length) {
+        const unique = new Set(ids);
+        if (unique.size !== ids.length) {
             ctx.addIssue({
-                code: 'custom', message: `question ${q.id}: option.id должны быть уникальны`, path: ['options'],
+                code: 'custom',
+                path: ['options'],
+                message: 'Option ids must be unique within a question',
             });
         }
 
-        const correctCount = q.options.filter((o) => o.correct).length;
+        // 2) correctness constraints
+        const correctCount = q.options.reduce((acc, o) => acc + (o.correct ? 1 : 0), 0);
 
         if (q.type === 'single' && correctCount !== 1) {
             ctx.addIssue({
                 code: 'custom',
-                message: `question ${q.id}: для type="single" должен быть ровно 1 правильный вариант`,
                 path: ['options'],
+                message: 'For single questions exactly 1 option must be correct',
             });
         }
 
         if (q.type === 'multiple' && correctCount < 1) {
             ctx.addIssue({
                 code: 'custom',
-                message: `question ${q.id}: для type="multiple" должен быть минимум 1 правильный вариант`,
                 path: ['options'],
-            });
-        }
-    });
-
-export const QuizSchema = z
-    .object({
-        title: z.string().min(1, 'title не должен быть пустым'),
-        description: z.string().min(1, 'description не должен быть пустым'),
-        questions: z.array(QuestionSchema).min(1, 'questions должен содержать минимум 1 вопрос'),
-    })
-    .superRefine((quiz, ctx) => {
-        const qids = quiz.questions.map((q) => q.id);
-
-        if (new Set(qids).size !== qids.length) {
-            ctx.addIssue({
-                code: 'custom', message: `questions: question.id должны быть уникальны`, path: ['questions'],
+                message: 'For multiple questions at least 1 option must be correct',
             });
         }
     });
 
 /**
- * Валидирует строку JSON: сначала JSON.parse, затем Zod
+ * Zod schema: quiz
  *
- * @param {string} jsonString
- * @returns {{ok:true, data: QuizData} | {ok:false, error: string}}
+ * Правила:
+ * - title/description обязательны
+ * - questions: минимум 1
+ * - question.id уникальны
  */
-export function validateQuizJson(jsonString) {
-    let parsed;
-    try {
-        parsed = JSON.parse(jsonString);
-    } catch (e) {
-        return {ok: false, error: `Некорректный JSON: ${e.message}`};
+export const QuizSchema = z
+    .object({
+        title: z.string().min(1, 'Title is required'),
+        description: z.string().min(1, 'Description is required'),
+        questions: z.array(QuestionSchema).min(1, 'At least 1 question required'),
+    })
+    .superRefine((quiz, ctx) => {
+        const qIds = quiz.questions.map((q) => q.id);
+        const unique = new Set(qIds);
+        if (unique.size !== qIds.length) {
+            ctx.addIssue({
+                code: 'custom',
+                path: ['questions'],
+                message: 'Question ids must be unique within a quiz',
+            });
+        }
+    });
+
+/**
+ * Результат валидации для UI.
+ * @typedef {Object} ValidationResult
+ * @property {true} ok
+ * @property {QuizData} data
+ *
+ * @typedef {Object} ValidationErrorResult
+ * @property {false} ok
+ * @property {string} message
+ * @property {Array<{path: string, message: string}>} issues
+ */
+
+/**
+ * Валидатор JSON квиза на основе Zod.
+ */
+export class QuizValidator {
+    /**
+     * Парсит строку как JSON и валидирует по Zod-схеме.
+     * @param {string} jsonString
+     * @returns {ValidationResult | ValidationErrorResult}
+     */
+    static validateJson(jsonString) {
+        const raw = QuizValidator.#parseJson(jsonString);
+        if (!raw.ok) return raw;
+
+        const parsed = QuizSchema.safeParse(raw.data);
+        if (parsed.success) {
+            return {ok: true, data: parsed.data};
+        }
+
+        const issues = parsed.error.issues.map((i) => ({
+            path: i.path.join('.'),
+            message: i.message,
+        }));
+
+        return {
+            ok: false,
+            message: QuizValidator.#formatIssuesMessage(issues),
+            issues,
+        };
     }
 
-    const res = QuizSchema.safeParse(parsed);
-    if (!res.success) {
-        const msg = res.error.issues
-            .map((i) => `${i.path.join('.') || 'root'}: ${i.message}`)
-            .join('\n');
-        return {ok: false, error: msg};
+    /**
+     * Валидирует уже готовый объект.
+     * @param {unknown} data
+     * @returns {ValidationResult | ValidationErrorResult}
+     */
+    static validateData(data) {
+        const parsed = QuizSchema.safeParse(data);
+        if (parsed.success) return {ok: true, data: parsed.data};
+
+        const issues = parsed.error.issues.map((i) => ({
+            path: i.path.join('.'),
+            message: i.message,
+        }));
+
+        return {
+            ok: false,
+            message: QuizValidator.#formatIssuesMessage(issues),
+            issues,
+        };
     }
 
-    return {ok: true, data: res.data};
+    /**
+     * JSON.parse с безопасной обработкой ошибок.
+     * @param {string} jsonString
+     * @returns {{ok:true,data:unknown} | {ok:false,message:string,issues:Array<{path:string,message:string}>}}
+     */
+    static #parseJson(jsonString) {
+        if (typeof jsonString !== 'string' || jsonString.trim() === '') {
+            return {
+                ok: false,
+                message: 'Введите JSON в поле',
+                issues: [{path: '', message: 'Пустая строка'}],
+            };
+        }
+
+        try {
+            const data = JSON.parse(jsonString);
+            if (data === null || typeof data !== 'object') {
+                return {
+                    ok: false,
+                    message: 'JSON должен быть объектом',
+                    issues: [{path: '', message: 'Ожидается объект, получено null/primitive'}],
+                };
+            }
+            return {ok: true, data};
+        } catch (e) {
+            return {
+                ok: false,
+                message: 'Некорректный JSON',
+                issues: [{path: '', message: e instanceof Error ? e.message : String(e)}],
+            };
+        }
+    }
+
+    /**
+     * Собирает одно сообщение для toast/modal.
+     * @param {Array<{path:string,message:string}>} issues
+     * @returns {string}
+     */
+    static #formatIssuesMessage(issues) {
+        const first = issues[0];
+        if (!first) return 'Ошибка валидации';
+
+        return first.path ? `${first.path}: ${first.message}` : first.message;
+    }
 }

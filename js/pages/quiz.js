@@ -1,9 +1,6 @@
-import {init} from "../utils/init";
 import {Quiz} from "../components/quiz";
 import dataQuiz from "../../quiz-examples/css-quiz.json";
-import {Header} from "../components/layout/header";
-
-init();
+import {Header} from "../components/header";
 
 const header = new Header();
 const quiz = new Quiz(dataQuiz);

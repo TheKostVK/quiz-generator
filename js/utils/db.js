@@ -1,69 +1,99 @@
-import { openDB } from 'idb';
+export class IndexedDBService {
+    /** @type {IDBDatabase|null} */
+    #db = null;
 
-export const dbPromise = openDB('quizzes-db', 1, {
-    upgrade(db) {
-        db.createObjectStore('quizzes', { keyPath: 'id' });
-        db.createObjectStore('processed-quizzes', { keyPath: 'id' });
-    },
-});
+    constructor(db) {
+        this.#db = db;
+    }
 
-export class IndexedDB {
-    constructor(dbName, dbVersion, dbUpgrade) {
+    /**
+     * Открывает БД и выполняет upgrade при необходимости
+     *
+     * @param {string} name
+     * @param {number} version
+     * @param {(db: IDBDatabase, oldVersion: number, newVersion: number | null) => void} [onUpgrade]
+     * @returns {Promise<IndexedDBService>}
+     */
+    static open(name, version, onUpgrade) {
         return new Promise((resolve, reject) => {
-            this.db = null;
-
-            if (!('indexedDB' in window)) reject('not supported');
-
-            const dbOpen = indexedDB.open(dbName, dbVersion);
-
-            if (dbUpgrade) {
-                dbOpen.onupgradeneeded = e => {
-                    dbUpgrade(dbOpen.result, e.oldVersion, e.newVersion);
-                };
+            if (!('indexedDB' in window)) {
+                reject(new Error('IndexedDB не поддерживается браузером'));
+                return;
             }
 
-            dbOpen.onsuccess = () => {
-                this.db = dbOpen.result;
-                resolve(this);
+            const request = indexedDB.open(name, version);
+
+            request.onupgradeneeded = (e) => {
+                if (onUpgrade) {
+                    onUpgrade(request.result, e.oldVersion, e.newVersion);
+                }
             };
-
-            dbOpen.onerror = e => {
-                reject(`IndexedDB error: ${ e.target.errorCode }`);
-            };
-        });
-    }
-
-    set(storeName, name, value) {
-        return new Promise((resolve, reject) => {
-            const transaction = this.db.transaction(storeName, 'readwrite'),
-                store = transaction.objectStore(storeName);
-
-            store.put(value, name);
-
-            transaction.oncomplete = () => {
-                resolve(true);
-            };
-
-            transaction.onerror = () => {
-                reject(transaction.error);
-            };
-        });
-    }
-
-    get(storeName, name) {
-        return new Promise((resolve, reject) => {
-            const transaction = this.db.transaction(storeName, 'readonly'),
-                store = transaction.objectStore(storeName),
-                request = store.get(name);
 
             request.onsuccess = () => {
-                resolve(request.result);
+                resolve(new IndexedDBService(request.result));
             };
 
             request.onerror = () => {
-                reject(request.error);
+                reject(request.error || new Error('Ошибка открытия IndexedDB'));
             };
         });
     }
-}
 
+    /**
+     * Получить запись по ключу
+     */
+    get(storeName, key) {
+        return this.#request(storeName, 'readonly', store => store.get(key));
+    }
+
+    /**
+     * Получить все записи
+     */
+    getAll(storeName) {
+        return this.#request(storeName, 'readonly', store => store.getAll());
+    }
+
+    /**
+     * Добавить или обновить запись
+     */
+    put(storeName, value, key) {
+        return this.#request(storeName, 'readwrite', store =>
+            key !== undefined ? store.put(value, key) : store.put(value)
+        );
+    }
+
+    /**
+     * Удалить запись
+     */
+    delete(storeName, key) {
+        return this.#request(storeName, 'readwrite', store => store.delete(key));
+    }
+
+    /**
+     * Очистить хранилище
+     */
+    clear(storeName) {
+        return this.#request(storeName, 'readwrite', store => store.clear());
+    }
+
+    /**
+     * Внутренний помощник для транзакций
+     */
+    #request(storeName, mode, action) {
+        return new Promise((resolve, reject) => {
+            if (!this.#db) {
+                reject(new Error('База данных не инициализирована'));
+                return;
+            }
+
+            const tx = this.#db.transaction(storeName, mode);
+            const store = tx.objectStore(storeName);
+            const req = action(store);
+
+            req.onsuccess = () => resolve(req.result);
+            req.onerror = () => reject(req.error);
+
+            tx.onerror = () => reject(tx.error);
+        });
+    }
+}

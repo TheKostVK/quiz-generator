@@ -34,28 +34,30 @@
                 <p class="quiz-generator__subtitle">Вставьте JSON...</p>
             </div>
 
-            <label class="quiz-generator__label">
+            <form class="quiz-generator__form">
+                <label class="quiz-generator__label">
                 <span class="caption">
                      Ваш JSON
                 </span>
-                <textarea name="json-quiz-generator-input" class="quiz-generator__input" rows="15" cols="50"
-                          placeholder="{
+                    <textarea name="json-quiz-generator-input" class="quiz-generator__input" rows="15" cols="50"
+                              placeholder="{
 «title»: «Placeholder»,
 «questions»: []
 }"
-                ></textarea>
-            </label>
+                    ></textarea>
+                </label>
 
-            <button class="btn btn--primary quiz-generator__submit">
-                Сгенерировать
-            </button>
+                <button class="btn btn--primary quiz-generator__submit" type="submit">
+                    Сгенерировать
+                </button>
+            </form>
         </section>
     </main>
     <footer class="footer">
         Учебный проект 2025
     </footer>
 </div>
-<div class="banner banner--open">
+<div class="banner">
     <div class="banner__overlay">
         <div class="banner__content">
             <div class="banner__header">
@@ -63,12 +65,12 @@
                     ❌
                 </div>
                 <h2 class="banner__title">
-                    Ошибка: не удалось обработать JSON.
+                    Ошибка: не удалось обработать JSON.
                 </h2>
             </div>
             <div class="banner__body">
                 <p class="body__description caption">
-                    Проверьте формат данных и попробуйте снова.
+                    Проверьте формат данных и попробуйте снова.
                 </p>
             </div>
             <div class="banner__footer">
