@@ -25,114 +25,52 @@
         </nav>
 
         <button class="header__burger" aria-label="Открыть меню">
-            <img src="assets/threeLines.svg" alt="" class="header__burger-icon header__burger-icon--open" />
-            <img src="assets/cross.svg" alt="" class="header__burger-icon header__burger-icon--close" />
+            <img src="assets/threeLines.svg" alt="" class="header__burger-icon header__burger-icon--open"/>
+            <img src="assets/cross.svg" alt="" class="header__burger-icon header__burger-icon--close"/>
         </button>
     </header>
     <main class="main">
         <section class="quizzes">
-            <header class="quizzes__header">
-                <h1 class="quizzes__title">Ваши квизы</h1>
-            </header>
-            <div class="quizzes__content">
-                <article class="quiz-card">
-                    <h3 class="quiz-card__title">Основы JavaScript</h3>
 
-                    <p class="quiz-card__description">
-                        Проверьте, насколько хорошо вы разбираетесь в базовых концепциях JS:
-                        типы данных, функции, область видимости и замыкания.
-                    </p>
-
-                    <div class="quiz-card__footer">
-                        <span class="quiz-card__questions-count">10 вопросов</span>
-
-                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
-                            Пройти
-                        </a>
-                    </div>
-                </article>
-                <article class="quiz-card">
-                    <h3 class="quiz-card__title">История искусственного интеллекта</h3>
-
-                    <p class="quiz-card__description">
-                        Тест о развитии ИИ — от первых нейронных сетей до современных языковых моделей.
-                    </p>
-
-                    <div class="quiz-card__footer">
-                        <span class="quiz-card__questions-count">8 вопросов</span>
-
-                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
-                            Пройти
-                        </a>
-                    </div>
-                </article>
-                <article class="quiz-card">
-                    <h3 class="quiz-card__title">HTML и структура веб-страниц</h3>
-
-                    <p class="quiz-card__description">
-                        Проверьте свои знания по тегам, атрибутам и семантике HTML5.
-                    </p>
-
-                    <div class="quiz-card__footer">
-                        <span class="quiz-card__questions-count">12 вопросов</span>
-
-                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
-                            Пройти
-                        </a>
-                    </div>
-                </article>
-                <article class="quiz-card">
-                    <h3 class="quiz-card__title">Психология восприятия цвета</h3>
-
-                    <p class="quiz-card__description">
-                        Как цвета влияют на эмоции и принятие решений? Пройдите тест и узнайте.
-                    </p>
-
-                    <div class="quiz-card__footer">
-                        <span class="quiz-card__questions-count">9 вопросов</span>
-
-                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
-                            Пройти
-                        </a>
-                    </div>
-                </article>
-                <article class="quiz-card">
-                    <h3 class="quiz-card__title">Философия сознания</h3>
-
-                    <p class="quiz-card__description">
-                        От Декарта до современного когнитивизма — что мы знаем о природе сознания?
-                    </p>
-
-                    <div class="quiz-card__footer">
-                        <span class="quiz-card__questions-count">7 вопросов</span>
-
-                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
-                            Пройти
-                        </a>
-                    </div>
-                </article>
-                <article class="quiz-card">
-                    <h3 class="quiz-card__title">UX-дизайн и пользовательские сценарии</h3>
-
-                    <p class="quiz-card__description">
-                        Квиз о паттернах UX, исследовании пользователей и принципах визуальной иерархии.
-                    </p>
-
-                    <div class="quiz-card__footer">
-                        <span class="quiz-card__questions-count">10 вопросов</span>
-
-                        <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
-                            Пройти
-                        </a>
-                    </div>
-                </article>
-            </div>
         </section>
     </main>
     <footer class="footer">
         Учебный проект 2025
     </footer>
 </div>
+<template id="quiz-card">
+    <article class="quiz-card">
+        <h3 class="quiz-card__title">Основы JavaScript</h3>
+
+        <p class="quiz-card__description">
+            Проверьте, насколько хорошо вы разбираетесь в базовых концепциях JS:
+            типы данных, функции, область видимости и замыкания.
+        </p>
+
+        <div class="quiz-card__footer">
+            <span class="quiz-card__questions-count">10 вопросов</span>
+
+            <a class="btn btn--link quiz-card__action" href="/quiz.html?id=...">
+                Пройти
+            </a>
+        </div>
+    </article>
+</template>
+<template id="quizzes-list">
+    <header class="quizzes__header">
+        <h1 class="quizzes__title">Ваши квизы</h1>
+    </header>
+    <div class="quizzes__content">
+
+    </div>
+</template>
+<template id="quizzes-empty">
+    <div class="quizzes__empty">
+        <h1 class="quizzes__empty-title">У вас нет сохранённых квизов(</h1>
+        <p class="quizzes__empty-subtitle caption">Но вы можете добавить!</p>
+        <a class="btn btn--primary quizzes__empty-action" href="/index.html">Добавить квиз</a>
+    </div>
+</template>
 <script
         type="module"
         src="./js/pages/quizzes.js"></script>
