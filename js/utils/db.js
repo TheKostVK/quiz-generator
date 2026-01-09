@@ -1,3 +1,5 @@
+import {openDB} from 'idb';
+
 export class IndexedDBService {
     #db = null;
 
@@ -8,86 +10,70 @@ export class IndexedDBService {
     /**
      * Открывает БД и выполняет upgrade при необходимости
      */
-    static open(name, version, onUpgrade) {
-        return new Promise((resolve, reject) => {
-            if (!('indexedDB' in window)) {
-                reject(new Error('IndexedDB не поддерживается браузером'));
-                return;
-            }
+    static async open(name, version, onUpgrade) {
+        if (!('indexedDB' in window)) {
+            throw new Error('IndexedDB не поддерживается браузером');
+        }
 
-            const request = indexedDB.open(name, version);
-
-            request.onupgradeneeded = (e) => {
+        const db = await openDB(name, version, {
+            upgrade(db, oldVersion, newVersion /*, transaction, event */) {
                 if (onUpgrade) {
-                    onUpgrade(request.result, e.oldVersion, e.newVersion);
+                    onUpgrade(db, oldVersion, newVersion);
                 }
-            };
-
-            request.onsuccess = () => {
-                resolve(new IndexedDBService(request.result));
-            };
-
-            request.onerror = () => {
-                reject(request.error || new Error('Ошибка открытия IndexedDB'));
-            };
+            },
         });
+
+        return new IndexedDBService(db);
     }
 
     /**
      * Получить запись по ключу
      */
     get(storeName, key) {
-        return this.#request(storeName, 'readonly', store => store.get(key));
+        this.#ensureDb();
+        return this.#db.get(storeName, key);
     }
 
     /**
      * Получить все записи
      */
     getAll(storeName) {
-        return this.#request(storeName, 'readonly', store => store.getAll());
+        this.#ensureDb();
+        return this.#db.getAll(storeName);
     }
 
     /**
      * Добавить или обновить запись
      */
     put(storeName, value, key) {
-        return this.#request(storeName, 'readwrite', store =>
-            key !== undefined ? store.put(value, key) : store.put(value)
-        );
+        this.#ensureDb();
+        return key !== undefined
+            ? this.#db.put(storeName, value, key)
+            : this.#db.put(storeName, value);
     }
 
     /**
      * Удалить запись
      */
     delete(storeName, key) {
-        return this.#request(storeName, 'readwrite', store => store.delete(key));
+        this.#ensureDb();
+        return this.#db.delete(storeName, key);
     }
 
     /**
      * Очистить хранилище
      */
     clear(storeName) {
-        return this.#request(storeName, 'readwrite', store => store.clear());
+        this.#ensureDb();
+        return this.#db.clear(storeName);
     }
 
     /**
-     * Внутренний помощник для транзакций
+     * Проверяет, что БД инициализирована
      */
-    #request(storeName, mode, action) {
-        return new Promise((resolve, reject) => {
-            if (!this.#db) {
-                reject(new Error('База данных не инициализирована'));
-                return;
-            }
-
-            const tx = this.#db.transaction(storeName, mode);
-            const store = tx.objectStore(storeName);
-            const req = action(store);
-
-            req.onsuccess = () => resolve(req.result);
-            req.onerror = () => reject(req.error);
-
-            tx.onerror = () => reject(tx.error);
-        });
+    #ensureDb() {
+        if (!this.#db) {
+            throw new Error('База данных не инициализирована');
+        }
     }
 }
