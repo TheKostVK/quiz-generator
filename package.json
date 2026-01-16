@@ -2,7 +2,7 @@
   "name": "quizzer",
   "version": "1.0.0",
   "description": "",
-  "author": "",
+  "author": "thekostvk",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
