@@ -1,8 +1,6 @@
 # Репозиторий GitHub
-**https://github.com/TheKostVK/quiz-generator**
 
-# Студент
-ФИО: Костюшин Владислав Владимирович
+**https://github.com/TheKostVK/quiz-generator**
 
 # Quiz Generator
 
